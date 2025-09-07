@@ -94,58 +94,38 @@ export const LandingPage: React.FC = () => {
       </div>
 
       {/* Mini Map Section */}
-      <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-200 mb-16">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Peta Lokasi ATM</h2>
-        <div className="bg-gradient-to-br from-blue-50 to-green-50 rounded-lg p-8 min-h-96 flex items-center justify-center relative overflow-hidden">
-          {/* Simulated map with ATM markers */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="grid grid-cols-6 gap-4 h-full">
-              {Array.from({ length: 24 }).map((_, i) => (
-                <div key={i} className="bg-gray-300 rounded"></div>
-              ))}
-            </div>
-          </div>
-          
-          {/* ATM Markers */}
-          {atmData.slice(0, 6).map((atm, index) => (
-            <div
-              key={atm.id}
-              className="absolute bg-white p-3 rounded-lg shadow-md border border-gray-200 cursor-pointer hover:shadow-lg transition-all duration-200 transform hover:scale-105"
-              style={{
-                top: `${20 + (index % 3) * 25}%`,
-                left: `${15 + Math.floor(index / 3) * 35 + (index % 2) * 10}%`,
-              }}
-            >
-              <div className="flex items-center space-x-2">
-                <span className="text-2xl">{atm.bankLogo}</span>
-                <div>
-                  <div className="font-semibold text-sm text-gray-900">{atm.bankName}</div>
-                  <div className="text-xs text-gray-600">{atm.location.split(' - ')[0]}</div>
-                  <div className={`w-2 h-2 rounded-full mt-1 ${
-                    atm.cashStatus === 'available' ? 'bg-green-500' :
-                    atm.cashStatus === 'low' ? 'bg-yellow-500' : 'bg-red-500'
-                  }`}></div>
-                </div>
-              </div>
-            </div>
-          ))}
-          
-          {/* Map Center Info */}
-          <div className="text-center z-10">
-            <div className="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-md">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Jakarta Area</h3>
-              <p className="text-sm text-gray-600 mb-4">Menampilkan {atmData.length} lokasi ATM</p>
-              <Link
-                to="/atm-list"
-                className="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200"
-              >
-                Lihat Semua ATM
-                <ArrowRight className="ml-1 h-4 w-4" />
-              </Link>
-            </div>
-          </div>
-        </div>
+<div className="bg-white p-8 rounded-xl shadow-lg border border-gray-200 mb-16">
+  <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Peta Lokasi ATM</h2>
+
+  <div className="relative rounded-lg overflow-hidden min-h-[420px]">
+    {/* Peta Jakarta pakai Google Maps Embed (tanpa API key) */}
+    <iframe
+      title="Peta Jakarta"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9897.20991149245!2d106.807!3d-6.2!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3e3d45b7c4d%3A0x1e5866c6f8ff9a6!2sJakarta!5e0!3m2!1sid!2sid!4v0000000000000"
+      className="w-full h-[480px] border-0"
+      loading="lazy"
+      referrerPolicy="no-referrer-when-downgrade"
+    />
+
+    {/* Info tengah */}
+    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+      <div className="pointer-events-auto bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-md">
+        <h3 className="text-lg font-semibold text-gray-900 mb-2">Jakarta Area</h3>
+        <p className="text-sm text-gray-600 mb-4">
+          Menampilkan {atmData?.length ?? 0} lokasi ATM
+        </p>
+        <Link
+          to="/atm-list"
+          className="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200"
+        >
+          Lihat Semua ATM
+          <ArrowRight className="ml-1 h-4 w-4" />
+        </Link>
       </div>
+    </div>
+  </div>
+</div>
+
 
       {/* CTA Section */}
       <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl p-12 text-center text-white">
