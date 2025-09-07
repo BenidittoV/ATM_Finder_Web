@@ -81,19 +81,6 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <List className={scrolled ? 'h-4 w-4' : 'h-4 w-4 text-white'} />
                 <span>Daftar ATM</span>
               </Link>
-
-              {/* CTA Desktop */}
-              <Link
-                to="/atm-list"
-                className={[
-                  'ml-2 inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold transition-all',
-                  scrolled
-                    ? 'bg-gradient-to-r from-blue-600 via-cyan-600 to-emerald-600 text-white hover:opacity-95 shadow'
-                    : 'bg-white text-blue-700 hover:bg-gray-100 shadow'
-                ].join(' ')}
-              >
-                Cari ATM
-              </Link>
             </nav>
           </div>
         </div>
